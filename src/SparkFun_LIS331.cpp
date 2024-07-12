@@ -299,6 +299,20 @@ bool LIS331::newZData()
   }
 }
 
+bool LIS331::newXYZData()
+{
+  uint8_t data;
+  LIS331_read(STATUS_REG, &data, 1);
+  if (data & 1<<3)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
 void LIS331::enableInterrupt(int_axis axis, trig_on_level trigLevel,
                      uint8_t interrupt, bool enable)
 {
