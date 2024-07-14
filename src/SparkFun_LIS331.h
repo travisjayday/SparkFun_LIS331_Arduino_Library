@@ -68,14 +68,14 @@ class LIS331
                        uint8_t interrupt, bool enable);
   void setIntDuration(uint8_t duration, uint8_t intSource);
   void setIntThreshold(uint8_t threshold, uint8_t intSource);
+  void LIS331_write(uint8_t address, uint8_t *data, uint8_t len);
+  void LIS331_read(uint8_t address, uint8_t *data, uint8_t len);
 
   private:
 
   comm_mode mode;    // comms mode, I2C or SPI
   uint8_t address;   // I2C address
   uint8_t CSPin;
-  void LIS331_write(uint8_t address, uint8_t *data, uint8_t len);
-  void LIS331_read(uint8_t address, uint8_t *data, uint8_t len);
 };
 
 #endif
