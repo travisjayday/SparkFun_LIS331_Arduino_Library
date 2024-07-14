@@ -113,7 +113,7 @@ void LIS331::setHighPassCoeff(high_pass_cutoff_freq_cfg hpcoeff)
   //  to the various constants available for this parameter.
   uint8_t data;
   LIS331_read(CTRL_REG2, &data, 1);
-  data &= ~0xfc;  // Clear the two low bits of the CTRL_REG2
+  data &= 0xfc;  // Clear the two low bits of the CTRL_REG2
   data |= hpcoeff;
   LIS331_write(CTRL_REG2, &data, 1);
 }
@@ -125,11 +125,11 @@ void LIS331::enableHPF(bool enable)
   LIS331_read(CTRL_REG2, &data, 1);
   if (enable)
   {
-    data |= 1<<5;
+    data |= 1<<4;
   }
   else
   {
-    data &= ~(1<<5);
+    data &= ~(1<<4);
   }
   LIS331_write(CTRL_REG2, &data, 1);
 }
@@ -237,12 +237,12 @@ void LIS331::intSrcConfig(int_sig_src src, uint8_t pin)
   // Enable latching by setting the appropriate bit.
   if (pin == 1)
   {
-    data &= ~0xfc; // clear the low two bits of the register
+    data &= 0xfc; // clear the low two bits of the register
     data |= src;
   }
   if (pin == 2)
   {
-    data &= ~0xe7; // clear bits 4:3 of the register
+    data &= 0xe7; // clear bits 4:3 of the register
     data |= src<<4;
   }
   LIS331_write(CTRL_REG3, &data, 1);
@@ -252,7 +252,7 @@ void LIS331::setFullScale(fs_range range)
 {
   uint8_t data; 
   LIS331_read(CTRL_REG4, &data, 1);
-  data &= ~0xcf;
+  data &= 0xcf;
   data |= range<<4;
   LIS331_write(CTRL_REG4, &data, 1);
 }
